@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">EDressing</string>
+    <string name="title_activity_bottom_naviguation">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_armoire">Armoire</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="message_accueil_btn">Vous allez entrer dans l\'EDressing !</string>
+</resources>
