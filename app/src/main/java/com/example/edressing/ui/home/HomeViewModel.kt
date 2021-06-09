@@ -1,11 +1,10 @@
 package com.example.edressing.ui.home
 
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.meteoguesser.MeteoAPI.MeteoResponse
-import com.example.meteoguesser.MeteoAPI.Singleton
+import com.example.edressing.MeteoAPI.MeteoResponse
+import com.example.edressing.MeteoAPI.Singleton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

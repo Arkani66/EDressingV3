@@ -17,12 +17,6 @@ class Singleton {
             .cache(cache)
             .build()*/
 
-        /*var mkittenApi: MeteoAPI =  Retrofit.Builder()
-            .baseUrl("https://api.thecatapi.com/v1/")
-            .addConverterFactory(GsonConverterFactory.create())
-            //.client(okHttpClient)
-            .build()
-            .create(MeteoAPI::class.java)*/
         var mmeteoAPI: MeteoAPI =  Retrofit.Builder()
             .baseUrl("http://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
