@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -11,10 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.edressing.R
 import com.example.edressing.databinding.FragmentHomeBinding
-import com.example.meteoguesser.MeteoAPI.MeteoResponse
-import com.example.meteoguesser.MeteoAPI.Singleton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +28,8 @@ class HomeFragment : Fragment() {
     private lateinit var mtextcity: TextView
     private lateinit var mtexttemperature: TextView
     private lateinit var mtextdescription: TextView
+    private lateinit var mloader: ProgressBar
+    private lateinit var mimage: ImageView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -56,17 +59,26 @@ class HomeFragment : Fragment() {
         mtextcity = view.findViewById(R.id.weather_city)
         mtexttemperature = view.findViewById(R.id.weather_temperature)
         mtextdescription = view.findViewById(R.id.weather_description)
+        mloader = view.findViewById(R.id.progressbar)
+        mimage = view.findViewById(R.id.weather_image)
 
+        var url_image = "http://openweathermap.org/img/wn/10n@2x.png"
 
         homeViewModel.mmeteoResponse.observe(viewLifecycleOwner, Observer {mmeteoModel ->
-            //mloader.isVisible = mmeteoModel is MeteoLoader
+            mloader.isVisible = mmeteoModel is MeteoLoader
             //mtexterror.isVisible = mmeteoModel is MeteoFailure
             if(mmeteoModel is MeteoSuccess) {
                 mtextcity.text = mmeteoModel.meteo.name
                 mtexttemperature.text = mmeteoModel.meteo.main.temp.toString()
                 mtextdescription.text = mmeteoModel.meteo.weather[0].description
+                url_image = "http://openweathermap.org/img/wn/"+mmeteoModel.meteo.weather[0].icon+"@2x.png"
+                Glide.with(this)
+                    .load(url_image)
+                    .centerCrop()
+                    .into(mimage)
             }
         })
+
 
     }
 

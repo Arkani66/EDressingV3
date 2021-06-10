@@ -9,4 +9,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_weather">#A4FFFFFF</color>
+
+    <color name="light_violet">#EBD2FC</color>
+    <color name="writing">#605269</color>
+    <color name="trans_purple">#88A93CEF</color>
+    <color name="objet">#AB9C27B0</color>
+    <color name="font">#9C27B0</color>
 </resources>

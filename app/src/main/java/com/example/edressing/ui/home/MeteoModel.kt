@@ -1,6 +1,7 @@
 package com.example.edressing.ui.home
 
-import com.example.meteoguesser.MeteoAPI.MeteoResponse
+import com.example.edressing.MeteoAPI.MeteoResponse
+
 
 /**
  *Created by $(USER) on $(DATE).
