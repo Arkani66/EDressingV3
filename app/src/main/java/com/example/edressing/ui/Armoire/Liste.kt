@@ -1,43 +1,25 @@
 package com.example.edressing.ui.Armoire
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.edressing.R
-import com.example.edressing.databinding.FragmentArmoireBinding
 
-class ArmoireFragment : Fragment() {
-
-    private lateinit var dashboardViewModel: DashboardViewModel
-    private var _binding: FragmentArmoireBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+/**
+ * A simple [Fragment] subclass as the second destination in the navigation.
+ */
+class Liste : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
-        _binding = FragmentArmoireBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-       // val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-           // textView.text = it
-        })
-        return root
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,10 +43,5 @@ class ArmoireFragment : Fragment() {
         view.findViewById<Button>(R.id.dessous).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_toDessous)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
