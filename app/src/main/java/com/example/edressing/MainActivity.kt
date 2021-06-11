@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.edressing.Connection.ConnectionUserActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mbackgroundimage: ImageView
@@ -24,13 +25,10 @@ class MainActivity : AppCompatActivity() {
             .into(mbackgroundimage)
         Glide.with(this)
             .load(R.drawable.ladie)
-            .centerCrop()
             .into(mladieimage)
 
         mbackgroundimage.setOnClickListener {
-            Toast.makeText(this@MainActivity, R.string.message_accueil_btn, Toast.LENGTH_LONG)
-                .show()
-            val intent = Intent(this, BottomNaviguation::class.java)
+            val intent = Intent(this, ConnectionUserActivity::class.java)
             startActivity(intent)
         }
     }

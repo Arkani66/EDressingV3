@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EDressing">
         <activity
-            android:name=".ConnectionActivity"
-            android:label="@string/title_activity_connection"
-            android:theme="@style/Theme.EDressing.NoActionBar"></activity>
+            android:name=".Connection.ConnectionUserActivity"
+            android:theme="@style/Theme.EDressing.NoActionBar"/>
         <activity
             android:name=".BottomNaviguation"
             android:label="@string/title_activity_bottom_naviguation" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.EDressing.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

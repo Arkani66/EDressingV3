@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.edressing.R
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class Vestes : Fragment() {
+
+    private lateinit var mimage: ImageView
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -25,5 +29,11 @@ class Vestes : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mimage = view.findViewById(R.id.imageViewveste)
+
+        Glide.with(this)
+            .load(R.drawable.veste)
+            .centerCrop()
+            .into(mimage)
     }
 }

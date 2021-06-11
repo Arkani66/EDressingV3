@@ -13,9 +13,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.edressing.R
 import com.example.edressing.databinding.FragmentHomeBinding
+import com.example.edressing.ui.home.Clothes.Clothes
+import com.example.edressing.ui.home.Clothes.ClothesAdaptater
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,9 +29,14 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
 
+    private lateinit var mrecyclerview : RecyclerView
+    private val madapterView = ClothesAdaptater(listOf(), ::onClickedClothes)
+    private val mlayoutmanager = LinearLayoutManager(context)
+
     private lateinit var mtextcity: TextView
     private lateinit var mtexttemperature: TextView
     private lateinit var mtextdescription: TextView
+    private lateinit var mtexterror: TextView
     private lateinit var mloader: ProgressBar
     private lateinit var mimage: ImageView
 
@@ -56,17 +65,24 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mrecyclerview = view.findViewById(R.id.recycler_view)
+        mrecyclerview.apply {
+            layoutManager = this@HomeFragment.mlayoutmanager
+            adapter = this@HomeFragment.madapterView
+        }
+
         mtextcity = view.findViewById(R.id.weather_city)
         mtexttemperature = view.findViewById(R.id.weather_temperature)
         mtextdescription = view.findViewById(R.id.weather_description)
         mloader = view.findViewById(R.id.progressbar)
         mimage = view.findViewById(R.id.weather_image)
+        mtexterror = view.findViewById(R.id.texterror)
 
         var url_image = "http://openweathermap.org/img/wn/10n@2x.png"
 
         homeViewModel.mmeteoResponse.observe(viewLifecycleOwner, Observer {mmeteoModel ->
             mloader.isVisible = mmeteoModel is MeteoLoader
-            //mtexterror.isVisible = mmeteoModel is MeteoFailure
+            mtexterror.isVisible = mmeteoModel is MeteoFailure
             if(mmeteoModel is MeteoSuccess) {
                 mtextcity.text = mmeteoModel.meteo.name
                 mtexttemperature.text = mmeteoModel.meteo.main.temp.toString()
@@ -82,41 +98,13 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun onClickedClothes(clothe: Clothes) {
+
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-/*
-    fun getMeteo() : String{
-
-
-        Singleton.mmeteoAPI.getWeather(/*"Paris", "399cf91df5aaa7ae4f360f3197d371cc", "metric", "fr"*/).enqueue(object :
-            Callback<MeteoResponse> {
-            override fun onResponse(
-                call: Call<MeteoResponse>,
-                response: Response<MeteoResponse>
-            ) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(this@MainActivity, "Success !", Toast.LENGTH_LONG).show()
-                    val mmeteoresponse: MeteoResponse? = response.body()
-                    if(mmeteoresponse != null) {
-                        textcity.text = mmeteoresponse.name
-                        val description: String = mmeteoresponse.weather[0].description
-                        textdescription.text = description
-                        texttemperature.text = mmeteoresponse.main.temp.toString()
-                        textplus.text = "plus"
-                    }
-
-                }
-            }
-
-            override fun onFailure(call: Call<MeteoResponse?>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "Failed !", Toast.LENGTH_LONG).show()
-                textplus.text = call.request().url().toString()
-                val erreur = t.message
-                textdescription.text = erreur
-            }
-        })
-        return "null"
-    }*/
 }

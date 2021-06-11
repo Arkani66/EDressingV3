@@ -5,26 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
- <!--   <fragment
-        android:id="@+id/first_fragment_connection"
-        android:name="com.example.edressing.FirstFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_first" >
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/Second2Fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/second_fragment_connection"
-        android:name="com.example.edressing.Second2Fragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_second2">
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>-->
-
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.edressing.ui.home.HomeFragment"
@@ -66,37 +46,37 @@
     <fragment
         android:id="@+id/Hauts"
         android:name="com.example.edressing.ui.Armoire.Hauts"
-        android:label="@string/first_fragment_label"
+        android:label="@string/hauts_label"
         tools:layout="@layout/hauts">
     </fragment>
     <fragment
         android:id="@+id/Ensembles"
         android:name="com.example.edressing.ui.Armoire.Ensembles"
-        android:label="@string/first_fragment_label"
+        android:label="@string/ensembles_label"
         tools:layout="@layout/ensembles">
     </fragment>
     <fragment
         android:id="@+id/Bas"
         android:name="com.example.edressing.ui.Armoire.Bas"
-        android:label="@string/first_fragment_label"
+        android:label="@string/bas_label"
         tools:layout="@layout/bas">
     </fragment>
     <fragment
         android:id="@+id/Dessous"
         android:name="com.example.edressing.ui.Armoire.Dessous"
-        android:label="@string/first_fragment_label"
+        android:label="@string/dessous_label"
         tools:layout="@layout/dessous">
     </fragment>
     <fragment
         android:id="@+id/Chaussures"
         android:name="com.example.edressing.ui.Armoire.Chaussures"
-        android:label="@string/first_fragment_label"
+        android:label="@string/chaussures_label"
         tools:layout="@layout/chaussures">
     </fragment>
     <fragment
         android:id="@+id/Vestes"
         android:name="com.example.edressing.ui.Armoire.Vestes"
-        android:label="@string/first_fragment_label"
+        android:label="@string/vestes_label"
         tools:layout="@layout/vestes">
     </fragment>
 </navigation>

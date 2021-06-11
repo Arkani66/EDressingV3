@@ -14,4 +14,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="message_newmember_btn">Vous allez créer un nouveau compte</string>
+    <string name="hauts_label">Hauts</string>
+    <string name="ensembles_label">Ensembles</string>
+    <string name="bas_label">Bas</string>
+    <string name="dessous_label">Dessous</string>
+    <string name="chaussures_label">Chaussures</string>
+    <string name="vestes_label">Vestes</string>
+    <string name="text_error">An error has occured</string>
 </resources>
