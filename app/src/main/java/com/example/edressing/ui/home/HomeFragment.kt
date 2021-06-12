@@ -71,6 +71,7 @@ class HomeFragment : Fragment() {
             adapter = this@HomeFragment.madapterView
         }
 
+
         mtextcity = view.findViewById(R.id.weather_city)
         mtexttemperature = view.findViewById(R.id.weather_temperature)
         mtextdescription = view.findViewById(R.id.weather_description)
@@ -92,9 +93,18 @@ class HomeFragment : Fragment() {
                     .load(url_image)
                     .centerCrop()
                     .into(mimage)
+                //madapterView.SortClothes(mmeteoModel.meteo.main.temp,mmeteoModel.meteo.main.feels_like,mmeteoModel.meteo.main.humidity, mlistClothe)
+
             }
         })
-
+        val mlistClothe: ArrayList<Clothes> = arrayListOf<Clothes>().apply {
+            add(Clothes("T-Shirt","1","chaud","soleil"))
+            add((Clothes("Manteau","2","froid","pluie")))
+            add(Clothes("Jupe","3","chaud","soleil"))
+            add(Clothes("Pantalon","4","froid","pluie"))
+            add(Clothes("Jupe","5","chaud","soleil"))
+        }
+        madapterView.updateList(mlistClothe)
 
     }
 
@@ -102,6 +112,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    //private fun SortClothes
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -52,6 +52,56 @@ class ClothesAdaptater(private var dataSet : List<Clothes>, var listener: ((Clot
 
     }
 
+    fun SortClothes(temperature: Double, vent: Double, pluie: Double,list: List<Clothes>){
+        var listClothes: ArrayList<Clothes> = arrayListOf<Clothes>()
+        if( temperature < 0)
+        {
+            list.forEach(){
+                if(it.tagtemp == "froid") listClothes.add(it)
+            }
+        }
+        else if(temperature in 0.0..20.0)
+        {
+
+            if( (temperature in 10.0..15.0) || vent >25)
+            {
+                list.forEach(){
+                    if(it.tagtemp == "froid" && it.tag == "pluie") listClothes.add(it)
+                }
+            }
+            else if( temperature<=15)
+            {
+                list.forEach(){
+                    if(it.tagtemp == "froid") listClothes.add(it)
+                }
+            }
+            else if( temperature<=8)
+            {
+                list.forEach(){
+                    if(it.tagtemp == "froid") listClothes.add(it)
+                }
+            }
+
+        }
+        else if( temperature >20 && temperature<30)
+        {
+            if(temperature >25)
+            {
+                list.forEach(){
+                    if(it.tagtemp == "chaud") listClothes.add(it)
+                }
+            }
+        }
+        else if( temperature >= 30)
+        {
+            list.forEach(){
+                if(it.tagtemp == "chaud") listClothes.add(it)
+            }
+        }
+
+        updateList(listClothes)
+    }
+
     override fun getItemCount() = dataSet.size
 
 }
