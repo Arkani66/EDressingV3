@@ -26,6 +26,25 @@
         app:layout_constraintTop_toBottomOf="@+id/mdp_edit_confirmation" />
 
     <EditText
+        android:id="@+id/name_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/login_edit"
+        app:layout_constraintTop_toTopOf="parent"
+        android:cursorVisible="true"
+        android:singleLine="true"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:fontFamily="sans-serif-condensed"
+        android:bufferType="normal"
+        android:ems="50"
+        />
+
+    <EditText
         android:id="@+id/login_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,14 +53,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/mdp_edit"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_edit"
         android:cursorVisible="true"
         android:singleLine="true"
         android:hint="@string/email"
         android:fontFamily="sans-serif-condensed"
         android:bufferType="normal"
+        android:inputType="textEmailAddress"
         android:ems="50"
-        android:inputType="textPersonName"
         />
 
     <EditText

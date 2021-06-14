@@ -1,26 +1,31 @@
 package com.example.edressing.Connection
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.edressing.BottomNaviguation
 import com.example.edressing.Connection.Extensions.toast
 import com.example.edressing.Connection.FirebaseUtils.firebaseAuth
 import com.example.edressing.Connection.FirebaseUtils.firebaseUser
 import com.example.edressing.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
+
 
 class CreateAccount : AppCompatActivity() {
 
     lateinit var userEmail: String
     lateinit var userPassword: String
+    lateinit var username: String
     lateinit var createAccountInputsArray: Array<EditText>
 
     private lateinit var mlogin: EditText
+    private lateinit var mname: EditText
     private lateinit var mmdp: EditText
     private lateinit var mmdp_confirm: EditText
     private lateinit var mcreationButton: Button
@@ -36,6 +41,7 @@ class CreateAccount : AppCompatActivity() {
         mmdp_confirm = findViewById(R.id.mdp_edit_confirmation)
         mcreationButton = findViewById(R.id.Create_account)
         mbackimage = findViewById(R.id.background_create_account)
+        mname = findViewById(R.id.name_edit)
         Glide.with(this)
             .load(R.drawable.wallpaper)
             .centerCrop()
@@ -62,6 +68,8 @@ class CreateAccount : AppCompatActivity() {
             mmdp.text.toString().trim().isNotEmpty() &&
             mmdp_confirm.text.toString().trim().isNotEmpty()
 
+    private fun nameNotEmpty(): Boolean = mname.text.toString().isNotEmpty()
+
     private fun identicalPassword(): Boolean {
         var identical = false
         if (notEmpty() &&
@@ -85,19 +93,37 @@ class CreateAccount : AppCompatActivity() {
             // identicalPassword() returns true only  when inputs are not empty and passwords are identical
             userEmail = mlogin.text.toString().trim()
             userPassword = mmdp.text.toString().trim()
+            username= mname.text.toString().trim()
 
             /*create a user*/
             firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        toast("created account successfully !")
-                        sendEmailVerification()
+                        toast("Compte créé avec succès !")
+                        //sendEmailVerification()
+                        val user = firebaseAuth.currentUser
+                        if(username!=null){
+                            user!!.updateProfile(UserProfileChangeRequest.Builder()
+                                .setDisplayName(username).build())
+                        }else{
+                            toast("Le nom d'utilisateur n'a pas fonctionné")
+                            user!!.updateProfile(UserProfileChangeRequest.Builder()
+                                .setDisplayName("Unknow").build())
+                        }
+
                         startActivity(Intent(this, BottomNaviguation::class.java))
-                        finish()
+                        //finish()
                     } else {
-                        toast("failed to Authenticate !")
+                        toast("Echec d'authentification")
                     }
                 }
+            //val user = FirebaseAuth.getInstance().currentUser
+
+            //val profileUpdates = UserProfileChangeRequest.Builder()
+            //    .setDisplayName(name).build()
+
+            //firebaseUser!!.updateProfile(UserProfileChangeRequest.Builder()
+            //    .setDisplayName(name).build())
         }
     }
 

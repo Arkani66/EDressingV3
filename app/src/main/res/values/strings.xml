@@ -3,7 +3,7 @@
     <string name="title_activity_bottom_naviguation">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_armoire">Armoire</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_profil">Votre Profil</string>
     <string name="message_accueil_btn">Vous allez entrer dans l\'EDressing !</string>
     <string name="title_activity_connection">ConnectionActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -27,4 +27,11 @@
     <string name="mdp_confirm">Confirmation</string>
     <string name="reload">Relancer</string>
     <string name="query_city">Entrer le nom de votre ville</string>
+    <string name="info_no_email_found">Aucun email n\'a été trouvé</string>
+    <string name="info_no_username_found">Aucun utilisateur n\'a été trouvé</string>
+    <string name="popup_message_confirmation_delete_account">Etes vous sûr de vouloir supprimer votre compte ?</string>
+    <string name="popup_message_choice_yes">Votre compte va être supprimé</string>
+    <string name="popup_message_choice_no">Votre compte ne sera pas supprimé</string>
+    <string name="msg_deleted_account">Votre compte a été supprimé</string>
+    <string name="name">Name</string>
 </resources>

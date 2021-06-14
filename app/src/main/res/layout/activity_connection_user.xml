@@ -45,7 +45,7 @@
       android:fontFamily="sans-serif-condensed"
       android:bufferType="normal"
       android:ems="50"
-      android:inputType="textPersonName"
+      android:inputType="textEmailAddress"
       />
 
   <EditText
