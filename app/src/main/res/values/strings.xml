@@ -25,4 +25,6 @@
     <string name="email">Email de connection</string>
     <string name="mdp">Votre mot de passe</string>
     <string name="mdp_confirm">Confirmation</string>
+    <string name="reload">Relancer</string>
+    <string name="query_city">Entrer le nom de votre ville</string>
 </resources>
