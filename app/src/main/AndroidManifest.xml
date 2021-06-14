@@ -16,6 +16,9 @@
             android:name=".Connection.ConnectionUserActivity"
             android:theme="@style/Theme.EDressing.NoActionBar"/>
         <activity
+            android:name=".Connection.CreateAccount"
+            android:theme="@style/Theme.EDressing.NoActionBar"/>
+        <activity
             android:name=".BottomNaviguation"
             android:label="@string/title_activity_bottom_naviguation" />
         <activity android:name=".MainActivity"

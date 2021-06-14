@@ -22,4 +22,7 @@
     <string name="chaussures_label">Chaussures</string>
     <string name="vestes_label">Vestes</string>
     <string name="text_error">An error has occured</string>
+    <string name="email">Email de connection</string>
+    <string name="mdp">Votre mot de passe</string>
+    <string name="mdp_confirm">Confirmation</string>
 </resources>
