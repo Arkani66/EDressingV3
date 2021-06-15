@@ -21,8 +21,7 @@ import com.example.edressing.MeteoAPI.Singleton
 import com.example.edressing.R
 import com.example.edressing.databinding.FragmentHomeBinding
 import com.example.edressing.ui.BDDapi.UserHelper
-import com.example.edressing.ui.home.Clothes.Clothes
-import com.example.edressing.ui.home.Clothes.ClothesAdaptater
+import com.example.edressing.ui.home.Clothes.*
 import com.example.edressing.ui.models.User
 import com.example.edressing.ui.models.Vetements
 import com.google.firebase.auth.FirebaseUser
@@ -44,7 +43,8 @@ class HomeFragment : Fragment() {
     private var mcity: MutableLiveData<String> = MutableLiveData()
 
     private val db = Firebase.firestore
-    var mlistClothe: ArrayList<Clothes> = recupListClothes()
+    private lateinit var mlistClothe: ArrayList<Clothes>
+    private lateinit var mlistClothe2: ListClothes
 
     private lateinit var mtextcity: TextView
     private lateinit var mtexttemperature: TextView
@@ -117,17 +117,11 @@ class HomeFragment : Fragment() {
                     .centerCrop()
                     .apply(RequestOptions.circleCropTransform())
                     .into(mimage)
-                //madapterView.SortClothes(mmeteoModel.meteo.main.temp,mmeteoModel.meteo.main.feels_like,mmeteoModel.meteo.main.humidity, mlistClothe)
 
             }
         })
-        /*val mlistClothe: ArrayList<Clothes> = arrayListOf<Clothes>().apply {
-            add(Clothes("T-Shirt","1","chaud","soleil"))
-            add((Clothes("Manteau","2","froid","pluie")))
-            add(Clothes("Jupe","3","chaud","soleil"))
-            add(Clothes("Pantalon","4","froid","pluie"))
-            add(Clothes("Jupe","5","chaud","soleil"))
-        }*/
+
+        mlistClothe = mlistClothe2.
 
         mbutton.setOnClickListener{
             if( mquerycity.text.toString() != null) homeViewModel.callAPICat2(mquerycity.text.toString())
@@ -141,23 +135,44 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun recupListClothes(): ArrayList<Clothes> {
-        var mlistClothe: ArrayList<Clothes> = arrayListOf<Clothes>()
-        db.collection(COLLECTION_NAME)
-            .whereEqualTo("temperature", "chaud")
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val clothe: Vetements? = document.toObject(Vetements::class.java)
-                    mlistClothe.add(Clothes(clothe!!.type,"0",clothe.temperature,clothe.temps))
-                //Log.d(TAG, "${document.id} => ${document.data}")
-                }
+    fun GetSortingClothesCaracters(temperature: Double, vent: Double, pluie: Double,list: List<Clothes>) : Caracters{
+        var temperaturefinal: String = "chaud"
+        var tempsfinal: String= "ensoleille"
+        if( temperature < 0)
+        {
+            temperaturefinal= "tres_froid"
+        }
+        else if(temperature in 0.0..20.0)
+        {
+            if( (temperature in 10.0..15.0) || vent >25)
+            {
+               temperaturefinal = "chaud"
+                tempsfinal = "venteux"
             }
-            .addOnFailureListener { exception ->
-                //Log.w(TAG, "Error getting documents: ", exception)
+            else if( temperature<=15)
+            {
+                temperaturefinal = "modéré"
             }
-        return mlistClothe
+            else if( temperature<=8)
+            {
+                temperaturefinal = "froid"
+            }
+        }
+        else if( temperature >20 && temperature<30)
+        {
+            if(temperature >25)
+            {
+                temperaturefinal = "tres_chaud"
+            }
+        }
+        else if( temperature >= 30)
+        {
+            temperaturefinal = "canicule"
+        }
+        var mcaract = Caracters(temperaturefinal,tempsfinal)
+        return mcaract
     }
+
 
     /* private fun getCityFromFirestore(): String? {
          var city :String? = "Paris"
