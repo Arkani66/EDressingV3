@@ -78,6 +78,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/weather_background"/>
 
+            <Button
+                android:id="@+id/button_home_clothes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tenue"
+                app:layout_constraintBottom_toTopOf="@id/recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weather_background"/>
+
             <TextureView
                 android:id="@+id/weather_background2"
                 android:layout_width="200dp"

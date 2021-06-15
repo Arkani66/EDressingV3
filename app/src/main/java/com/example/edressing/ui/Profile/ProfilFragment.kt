@@ -11,12 +11,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.edressing.Connection.FirebaseUtils.firebaseAuth
 import com.example.edressing.R
 import com.example.edressing.databinding.FragmentProfilBinding
-import com.google.android.gms.tasks.OnSuccessListener
+import com.example.edressing.ui.BDDapi.UserHelper
+import com.example.edressing.ui.models.User
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class ProfilFragment : Fragment() {
@@ -29,6 +34,7 @@ class ProfilFragment : Fragment() {
 
     private lateinit var mtextusername: TextView
     private lateinit var mtextusermail: TextView
+    private lateinit var mtextusercity: TextView
 
     private val binding get() = _binding!!
 
@@ -58,6 +64,7 @@ class ProfilFragment : Fragment() {
         mbuttonupdate = view.findViewById(R.id.button_update)
         mtextusername = view.findViewById(R.id.text_profilname)
         mtextusermail = view.findViewById(R.id.text_profilemail)
+        mtextusercity = view.findViewById(R.id.text_profilcity)
 
         updateUIWhenCreating()
 
@@ -89,10 +96,19 @@ class ProfilFragment : Fragment() {
             val email =
                 if (TextUtils.isEmpty(getCurrentUser()!!.email)) getString(R.string.info_no_email_found)
                 else getCurrentUser()!!.email!!
-            val username =
+            var username =
                 if (TextUtils.isEmpty(getCurrentUser()!!.displayName)) getString(R.string.info_no_username_found)
                 else getCurrentUser()!!.displayName!!
 
+            //city = UserHelper
+            UserHelper.getUser(getCurrentUser()!!.uid).addOnSuccessListener { document ->
+                val currentUser: User? = document.toObject(User::class.java)
+                val city =
+                    if (TextUtils.isEmpty(currentUser?.getCity())) getString(R.string.info_no_usercity_found) else currentUser?.getCity()
+                mtextusercity.text = "Votre ville : $city"
+                username = if (TextUtils.isEmpty(currentUser?.getUserName())) getString(R.string.info_no_usercity_found) else currentUser?.getUserName()
+                    .toString()
+            }
             //Update views with data
             mtextusername.text = "Nom d'utilisateur : $username"
             mtextusermail.text = "Email : $email"
@@ -111,10 +127,15 @@ class ProfilFragment : Fragment() {
     fun deleteUserFromFirebase() {
         if (getCurrentUser() != null) {
             val user = firebaseAuth.currentUser!!
+            UserHelper.deleteUser(getCurrentUser()!!.uid).addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
             user.delete()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d(TAG, R.string.msg_deleted_account.toString())
+                        Toast.makeText(activity,  R.string.msg_deleted_account.toString(), Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
 
@@ -138,11 +159,12 @@ class ProfilFragment : Fragment() {
         firebaseAuth.signOut()
         //startActivity(Intent(this, CreateAccount::class.java))
         //toast("signed out")
-        /*Toast.makeText(this, "Déconnecté !", Toast.LENGTH_LONG)
+        Toast.makeText(activity, "Déconnecté !", Toast.LENGTH_LONG)
             .show()
-        onDestroyView()*/
+        //onDestroyView()
         mtextusername.text = "Déconnecté !"
         mtextusermail.text = " "
+        mtextusercity.text = " "
     }
 
     override fun onDestroyView() {

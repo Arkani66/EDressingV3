@@ -1,7 +1,9 @@
 package com.example.edressing.Connection
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -12,7 +14,7 @@ import com.example.edressing.Connection.Extensions.toast
 import com.example.edressing.Connection.FirebaseUtils.firebaseAuth
 import com.example.edressing.Connection.FirebaseUtils.firebaseUser
 import com.example.edressing.R
-import com.google.firebase.auth.FirebaseAuth
+import com.example.edressing.ui.BDDapi.UserHelper
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 
@@ -26,6 +28,7 @@ class CreateAccount : AppCompatActivity() {
 
     private lateinit var mlogin: EditText
     private lateinit var mname: EditText
+    private lateinit var mcity: EditText
     private lateinit var mmdp: EditText
     private lateinit var mmdp_confirm: EditText
     private lateinit var mcreationButton: Button
@@ -42,6 +45,7 @@ class CreateAccount : AppCompatActivity() {
         mcreationButton = findViewById(R.id.Create_account)
         mbackimage = findViewById(R.id.background_create_account)
         mname = findViewById(R.id.name_edit)
+        mcity = findViewById(R.id.city_edit)
         Glide.with(this)
             .load(R.drawable.wallpaper)
             .centerCrop()
@@ -110,20 +114,38 @@ class CreateAccount : AppCompatActivity() {
                             user!!.updateProfile(UserProfileChangeRequest.Builder()
                                 .setDisplayName("Unknow").build())
                         }
-
+                        createUserInFirestore()
                         startActivity(Intent(this, BottomNaviguation::class.java))
                         //finish()
                     } else {
                         toast("Echec d'authentification")
                     }
                 }
-            //val user = FirebaseAuth.getInstance().currentUser
 
-            //val profileUpdates = UserProfileChangeRequest.Builder()
-            //    .setDisplayName(name).build()
+        }
+    }
 
-            //firebaseUser!!.updateProfile(UserProfileChangeRequest.Builder()
-            //    .setDisplayName(name).build())
+    // 1 - Http request that create user in firestore
+    private fun createUserInFirestore() {
+        if (firebaseAuth.currentUser != null) {
+            var user = firebaseAuth.currentUser
+            val city: String = mcity.text.toString().trim()
+            val username: String? = user!!.displayName
+            val uid: String = user.uid
+            val email = user.email
+            UserHelper.createUser(uid, username, email, city)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $uid")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
+                .addOnCompleteListener{task ->
+                    if(task.isSuccessful){
+                        toast("Compte utilisateur créé")
+                    }
+                    else toast("Echec de création du compte")
+                }
         }
     }
 

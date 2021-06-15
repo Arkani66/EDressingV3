@@ -30,8 +30,12 @@
     <string name="info_no_email_found">Aucun email n\'a été trouvé</string>
     <string name="info_no_username_found">Aucun utilisateur n\'a été trouvé</string>
     <string name="popup_message_confirmation_delete_account">Etes vous sûr de vouloir supprimer votre compte ?</string>
-    <string name="popup_message_choice_yes">Votre compte va être supprimé</string>
-    <string name="popup_message_choice_no">Votre compte ne sera pas supprimé</string>
+    <string name="popup_message_choice_yes">Oui</string>
+    <string name="popup_message_choice_no">Non</string>
     <string name="msg_deleted_account">Votre compte a été supprimé</string>
     <string name="name">Name</string>
+    <string name="info_no_usercity_found">Ville inconnue</string>
+    <string name="popup_message_choice_Ok">OK</string>
+    <string name="attention_city_home">Attention, vous devez remplir la zone de la ville !</string>
+    <string name="tenue">Voir ma tenue !</string>
 </resources>

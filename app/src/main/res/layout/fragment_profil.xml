@@ -28,11 +28,9 @@
         android:id="@+id/text_profilname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintVertical_bias="0.2"
-        app:layout_constraintBottom_toTopOf="@id/text_profilemail"
+        app:layout_constraintBottom_toTopOf="@id/text_profilcity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_title_profil" />
@@ -44,11 +42,22 @@
         android:layout_marginStart="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintBottom_toTopOf="@id/button_update"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_profilname" />
+
+ <TextView
+     android:id="@+id/text_profilcity"
+     android:layout_width="0dp"
+     android:layout_height="wrap_content"
+     android:layout_marginStart="8dp"
+     android:textAlignment="center"
+     android:textSize="20sp"
+     app:layout_constraintBottom_toTopOf="@id/button_update"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@id/text_profilemail" />
 
     <Button
         android:id="@+id/button_signed_out"
