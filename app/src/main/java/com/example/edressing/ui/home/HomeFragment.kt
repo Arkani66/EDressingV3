@@ -109,7 +109,7 @@ class HomeFragment : Fragment() {
             mquerycity.isVisible = mmeteoModel is MeteoFailure
             if(mmeteoModel is MeteoSuccess) {
                 mtextcity.text = mmeteoModel.meteo.name
-                mtexttemperature.text ="$mmeteoModel.meteo.main.temp.toString()°C"
+                mtexttemperature.text = mmeteoModel.meteo.main.temp.toString()+"°C"
                 mtextdescription.text = mmeteoModel.meteo.weather[0].description
                 url_image = "http://openweathermap.org/img/wn/"+mmeteoModel.meteo.weather[0].icon+"@2x.png"
                 Glide.with(this)

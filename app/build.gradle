@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.1'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation 'com.google.firebase:firebase-firestore:23.0.1'
+    implementation 'androidx.work:work-runtime:2.4.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -79,6 +80,14 @@ dependencies {
     // Declare the dependency for the Cloud Firestore library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+
+    // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     //implementation 'com.android.support:multidex:1.0.3'
 
